@@ -24,9 +24,10 @@ export class HomeComponent implements AfterViewInit {
           trigger: '.animated-element',
           start: 'start center',
           end: 'bottom center',
-          scrub: false,
+          scrub: 1,
+          pin: true,
           markers: true,
-          toggleActions: 'play reverse play reverse',
+          // toggleActions: 'play reverse play reverse',
         },
       }).to('.animated-element', {
         x: 750,
