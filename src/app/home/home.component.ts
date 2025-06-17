@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, NgZone } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, NgZone, ViewChild } from '@angular/core';
 import gsap from 'gsap';
 import Lenis from 'lenis';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -15,38 +15,79 @@ export class HomeComponent implements AfterViewInit {
   constructor(private ngZone: NgZone) { }
 
   ngAfterViewInit(): void {
-    gsap.registerPlugin(ScrollTrigger);
 
-    this.ngZone.runOutsideAngular(() => {
+    const helloElement = document.querySelector('.hello-text') as HTMLElement;
+    const mainContent = document.querySelector('.main-content') as HTMLElement;
 
-      gsap.timeline({
-        scrollTrigger: {
-          trigger: '.animated-element',
-          start: 'start center',
-          end: 'bottom center',
-          scrub: 1,
-          pin: true,
-          markers: true,
-          // toggleActions: 'play reverse play reverse',
-        },
-      }).to('.animated-element', {
-        x: 750,
-        rotation: 360,
-        scale: 2.5,
-      });
+    const greetings = [
+      'Hello', 'नमस्ते', 'Hola', 'Bonjour', 'Ciao', 'こんにちは', '안녕하세요', 'مرحبا', 'Привет', 'Olá', 'שלום', 'नमस्कार', 'Здраво', 'வணக்கம்'
+    ];
 
-      const lenis = new Lenis();
-      lenis.on('scroll', (e: any) => {
-        console.log('Lenis Scroll:', e);
-      });
+    const timeline = gsap.timeline()
 
-      const raf = (time: number) => {
-        lenis.raf(time);
-        requestAnimationFrame(raf);
-      };
+    timeline.to(helloElement, {
+      duration: 0.6,
+      opacity: 0,
+      onComplete: () => {
+        helloElement.innerHTML = greetings[0];
+      }
+    })
+      .to(helloElement, { duration: 0.3, opacity: 1 })
+      .to(helloElement, { duration: 0.3, opacity: 0, delay: 0.2 });
 
-      requestAnimationFrame(raf);
-    });
+    greetings.slice(1).forEach((word) => {
+      timeline.to(helloElement, {
+        duration: 0.04,
+        opacity: 0,
+        onComplete: () => {
+          helloElement.innerHTML = word
+        }
+      })
+        .to(helloElement, { duration: 0.04, opacity: 1 })
+        .to(helloElement, { duration: 0.04, opacity: 0, delay: 0.1 })
+    })
+
+    timeline.to('.intro-container', {
+      duration: 0.5,
+      opacity: 0,
+      onComplete: () => {
+        gsap.to(mainContent, { opacity: 1 });
+      }
+    })
+
+
+    // gsap.registerPlugin(ScrollTrigger);
+
+    // this.ngZone.runOutsideAngular(() => {
+
+    //   gsap.timeline({
+    //     scrollTrigger: {
+    //       trigger: '.animated-element',
+    //       start: 'start center',
+    //       end: 'bottom center',
+    //       scrub: 1,
+    //       pin: true,
+    //       markers: true,
+    //       // toggleActions: 'play reverse play reverse',
+    //     },
+    //   }).to('.animated-element', {
+    //     x: 750,
+    //     rotation: 360,
+    //     scale: 2.5,
+    //   });
+
+    //   const lenis = new Lenis();
+    //   lenis.on('scroll', (e: any) => {
+    //     console.log('Lenis Scroll:', e);
+    //   });
+
+    //   const raf = (time: number) => {
+    //     lenis.raf(time);
+    //     requestAnimationFrame(raf);
+    //   };
+
+    //   requestAnimationFrame(raf);
+    // });
 
   }
 }
