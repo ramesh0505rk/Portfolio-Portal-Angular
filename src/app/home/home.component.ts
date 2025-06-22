@@ -2,21 +2,23 @@ import { AfterViewInit, Component, ElementRef, NgZone, ViewChild } from '@angula
 import gsap from 'gsap';
 import Lenis from 'lenis';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
 export class HomeComponent implements AfterViewInit {
-
+  showIntro = true;
   constructor(private ngZone: NgZone) { }
 
   ngAfterViewInit(): void {
 
     const helloElement = document.querySelector('.hello-text') as HTMLElement;
+    const introContainer = document.querySelector('.intro-container') as HTMLElement;
     const mainContent = document.querySelector('.main-content') as HTMLElement;
 
     const greetings = [
@@ -26,7 +28,7 @@ export class HomeComponent implements AfterViewInit {
     const timeline = gsap.timeline()
 
     timeline.to(helloElement, {
-      duration: 0.6,
+      duration: 0.5,
       opacity: 0,
       onComplete: () => {
         helloElement.innerHTML = greetings[0];
@@ -47,14 +49,16 @@ export class HomeComponent implements AfterViewInit {
         .to(helloElement, { duration: 0.04, opacity: 0, delay: 0.1 })
     })
 
-    timeline.to('.intro-container', {
-      duration: 0.5,
-      opacity: 0,
+
+    timeline.to(introContainer, {
+      duration: 1,
+      y: '-100%',
+      ease: 'power2.inOut',
       onComplete: () => {
+        this.showIntro = false;
         gsap.to(mainContent, { opacity: 1 });
       }
-    })
-
+    });
 
     // gsap.registerPlugin(ScrollTrigger);
 
@@ -88,6 +92,5 @@ export class HomeComponent implements AfterViewInit {
 
     //   requestAnimationFrame(raf);
     // });
-
   }
 }

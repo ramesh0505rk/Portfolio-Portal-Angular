@@ -1,21 +1,27 @@
 .intro-container {
-    min-height: 100vh;
-    background-color: #000000;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100%;
+    background-color: black;
     color: white;
-    font-family: "Work Sans", sans-serif;
+    z-index: 999;
+    // transform: translateY(0);
 }
 
 .hello-text {
-    font-size: 2rem;
-    // font-weight: bold;
-    margin: 0;
-
+    font-size: 3rem;
     opacity: 0;
     transition: opacity 0.1s ease;
 }
 
 .main-content {
+    position: relative;
+    z-index: 1;
     transition: opacity 1s ease;
+    min-height: 100vh;
+    background-color: rgb(229, 28, 28);
 }
 
 // :host {
