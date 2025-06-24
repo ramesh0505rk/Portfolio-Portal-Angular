@@ -1,9 +1,17 @@
-<div *ngIf="showIntro" class="intro-container d-flex align-items-center justify-content-center">
-    <h1 class="hello-text m-0"></h1>
-</div>
+<svg *ngIf="showIntro" class="intro-container" [attr.width]="svgWidth" [attr.height]="svgHeight"
+    preserveAspectRatio="none">
+
+    <path [attr.d]="svgPath" fill="black" />
+
+    <foreignObject x="0" y="200" [attr.width]="svgWidth" [attr.height]="svgHeight - 400">
+        <div class="text-holder" xmlns="http://www.w3.org/1999/xhtml">
+            <h1 #helloText class="hello-text">Hello</h1>
+        </div>
+    </foreignObject>
+</svg>
 
 <div class="main-content">
-<!-- The rest of your home content goes here -->
+    <!-- The rest of your home content goes here -->
     <!-- <p>Welcome to my portfolio!</p> -->
 </div>
 

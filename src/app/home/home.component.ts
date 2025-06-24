@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, NgZone, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, NgZone, OnInit, ViewChild } from '@angular/core';
 import gsap from 'gsap';
 import Lenis from 'lenis';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -11,18 +11,35 @@ import { CommonModule } from '@angular/common';
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
-export class HomeComponent implements AfterViewInit {
+export class HomeComponent implements AfterViewInit, OnInit {
   showIntro = true;
+  svgPath: string = '';
+  svgWidth = 0;
+  svgHeight = 0;
   constructor(private ngZone: NgZone) { }
+
+  ngOnInit(): void {
+    // ✅ Initialize dimensions early
+    this.svgWidth = window.innerWidth;
+    const height = window.innerHeight;
+    this.svgHeight = height + 400;
+
+    // ✅ Set path before template renders
+    this.svgPath = `
+      M0,200
+      Q${this.svgWidth / 2},0 ${this.svgWidth},200
+      L${this.svgWidth},${height + 200}
+      Q${this.svgWidth / 2},${height + 400} 0,${height + 200}
+      Z
+    `;
+  }
 
   ngAfterViewInit(): void {
 
     const helloElement = document.querySelector('.hello-text') as HTMLElement;
-    const introContainer = document.querySelector('.intro-container') as HTMLElement;
-    const mainContent = document.querySelector('.main-content') as HTMLElement;
 
     const greetings = [
-      'Hello', 'नमस्ते', 'Hola', 'Bonjour', 'Ciao', 'こんにちは', '안녕하세요', 'مرحبا', 'Привет', 'Olá', 'שלום', 'नमस्कार', 'Здраво', 'வணக்கம்'
+      'Hello', 'नमस्ते', 'Hola', 'Bonjour', 'こんにちは', 'Ciao', '안녕하세요', 'مرحبا', 'Привет', 'Olá', 'नमस्कार', 'Здраво', 'வணக்கம்'
     ];
 
     const timeline = gsap.timeline()
@@ -50,16 +67,15 @@ export class HomeComponent implements AfterViewInit {
     })
 
 
-    timeline.to(introContainer, {
-      duration: 1,
-      y: '-100%',
-      ease: 'power2.inOut',
+    timeline.to('.intro-container', {
+      duration: 0.8,
+      y: `-${this.svgHeight}px`,
+      ease: 'power3.inOut',
       onComplete: () => {
         this.showIntro = false;
-        gsap.to(mainContent, { opacity: 1 });
+        // gsap.to('.main-content', { opacity: 1 });
       }
     });
-
     // gsap.registerPlugin(ScrollTrigger);
 
     // this.ngZone.runOutsideAngular(() => {
