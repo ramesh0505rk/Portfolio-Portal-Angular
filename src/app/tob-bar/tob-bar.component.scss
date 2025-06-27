@@ -1,0 +1,31 @@
+.topbar-container {
+    // background-color: rebeccapurple;
+    justify-content: space-between;
+    font-family: "Work Sans", sans-serif;
+    padding: 20px 20px;
+}
+
+.menu-container {
+    width: max-content;
+    gap: 40px;
+    // background-color: red;
+}
+
+.logo-container {
+    width: max-content;
+    // background-color: blue;
+    .logo {
+        text-decoration: none;
+        color: #000000;
+        font-size: 1.5rem;
+    }
+}
+
+.text {
+    text-decoration: none;
+    color: #000000;
+    font-size: 1.5rem;
+    line-height: 24px;
+    height: 24px;
+    overflow: hidden;
+}

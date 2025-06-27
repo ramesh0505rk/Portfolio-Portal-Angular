@@ -3,11 +3,12 @@ import gsap from 'gsap';
 import Lenis from 'lenis';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { CommonModule } from '@angular/common';
+import { TobBarComponent } from '../tob-bar/tob-bar.component';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, TobBarComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
