@@ -4,11 +4,13 @@ import Lenis from 'lenis';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { CommonModule } from '@angular/common';
 import { TobBarComponent } from '../tob-bar/tob-bar.component';
+import { TopBarTestComponent } from '../top-bar-test/top-bar-test.component';
+import { PageLoaderComponent } from '../page-loader/page-loader.component';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, TobBarComponent],
+  imports: [CommonModule, TobBarComponent, TopBarTestComponent, PageLoaderComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
@@ -17,6 +19,7 @@ export class HomeComponent implements AfterViewInit, OnInit {
   svgPath: string = '';
   svgWidth = 0;
   svgHeight = 0;
+  pageTitle: string = 'Hello';
   constructor(private ngZone: NgZone) { }
 
   ngOnInit(): void {
@@ -55,7 +58,7 @@ export class HomeComponent implements AfterViewInit, OnInit {
       .to(helloElement, { duration: 0.3, opacity: 1 })
       .to(helloElement, { duration: 0.3, opacity: 0, delay: 0.2 });
 
-    greetings.slice(1).forEach((word) => {
+    greetings.slice(1, greetings.length - 1).forEach((word) => {
       timeline.to(helloElement, {
         duration: 0.04,
         opacity: 0,
@@ -66,6 +69,16 @@ export class HomeComponent implements AfterViewInit, OnInit {
         .to(helloElement, { duration: 0.04, opacity: 1 })
         .to(helloElement, { duration: 0.04, opacity: 0, delay: 0.1 })
     })
+
+    timeline.to(helloElement, {
+      duration: 0.04,
+      opacity: 0,
+      onComplete: () => {
+        helloElement.innerHTML = greetings[greetings.length - 1]; // Last greeting
+      }
+    })
+      .to(helloElement, { duration: 0.04, opacity: 1 })
+      .to(helloElement, { duration: 0.3, opacity: 0, delay: 0.6 });
 
 
     timeline.to('.intro-container', {

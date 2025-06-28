@@ -35,7 +35,8 @@
             ],
             "scripts": [
               "node_modules/bootstrap/dist/js/bootstrap.min.js",
-              "src/assets/libs/gsap/SplitText.min.js"
+              "src/assets/libs/gsap/SplitText.min.js",
+              "src/assets/libs/gsap/ScrambleTextPlugin.min.js"
             ]
           },
           "configurations": {

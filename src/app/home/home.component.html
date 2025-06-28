@@ -1,4 +1,4 @@
-<svg *ngIf="showIntro" class="intro-container" [attr.width]="svgWidth" [attr.height]="svgHeight"
+<!-- <svg *ngIf="showIntro" class="intro-container" [attr.width]="svgWidth" [attr.height]="svgHeight"
     preserveAspectRatio="none">
 
     <path [attr.d]="svgPath" fill="black" />
@@ -8,10 +8,14 @@
             <h1 #helloText class="hello-text">Hello</h1>
         </div>
     </foreignObject>
-</svg>
+</svg> -->
+
+<app-page-loader *ngIf="showIntro" class="intro-container" [contentClassName]="'hello-text'" [pageTitle]="pageTitle"
+    [x]="0" [y]="200"></app-page-loader>
 
 <div class="main-content">
-    <app-tob-bar></app-tob-bar>
+    <!-- <app-tob-bar></app-tob-bar> -->
+    <app-top-bar-test></app-top-bar-test>
     <!-- The rest of your home content goes here -->
     <!-- <p>Welcome to my portfolio!</p> -->
 </div>

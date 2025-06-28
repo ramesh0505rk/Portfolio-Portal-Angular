@@ -23,9 +23,9 @@ export class TobBarComponent implements OnInit, AfterContentInit {
   @ViewChildren('textElement') textElements!: QueryList<ElementRef>
 
   textItems = [
-    { text: 'Work' },
-    { text: 'About' },
-    { text: 'Contact' }
+    { text: 'works' },
+    { text: 'about me' },
+    { text: 'get in touch' }
   ];
 
   private animations: Map<HTMLElement, TextAnimation> = new Map();

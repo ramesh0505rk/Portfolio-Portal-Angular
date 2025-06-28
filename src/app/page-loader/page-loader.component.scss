@@ -1,0 +1,23 @@
+.page-title {
+    font-size: 3rem;
+    color: white;
+    font-family: 'Guton', sans-serif;
+}
+
+.text-holder {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+}
+
+.hello-text {
+    font-size: 3rem;
+    color: white;
+    opacity: 0;
+    transition: opacity 0.1s ease;
+    font-family: 'Guton', sans-serif;
+    // font-family: "Syncopate", sans-serif;
+}

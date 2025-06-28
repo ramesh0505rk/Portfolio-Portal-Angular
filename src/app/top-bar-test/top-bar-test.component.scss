@@ -1,5 +1,4 @@
 .topbar-container {
-    // background-color: rebeccapurple;
     justify-content: space-between;
     font-family: 'Guton', sans-serif;
     padding: 20px 20px;
@@ -7,19 +6,24 @@
 
 .menu-container {
     width: max-content;
-    gap: 40px;
+    // gap: 8px;
     // background-color: red;
 }
 
 .logo-container {
     width: max-content;
 
-    // background-color: blue;
     .logo {
         text-decoration: none;
         color: #000000;
         font-size: 1rem;
     }
+}
+
+.menu-item-container {
+    width: 120px; // set a width that fits your longest text nicely
+    text-align: center;
+    // background-color: yellow;
 }
 
 .text {
@@ -29,4 +33,5 @@
     line-height: 16px;
     height: 16px;
     overflow: hidden;
+    cursor: pointer;
 }
