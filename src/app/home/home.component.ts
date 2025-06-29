@@ -20,22 +20,13 @@ export class HomeComponent implements AfterViewInit, OnInit {
   svgWidth = 0;
   svgHeight = 0;
   pageTitle: string = 'Hello';
-  constructor(private ngZone: NgZone) { }
+  constructor() { }
 
   ngOnInit(): void {
     // ✅ Initialize dimensions early
     this.svgWidth = window.innerWidth;
     const height = window.innerHeight;
     this.svgHeight = height + 400;
-
-    // ✅ Set path before template renders
-    this.svgPath = `
-      M0,200
-      Q${this.svgWidth / 2},0 ${this.svgWidth},200
-      L${this.svgWidth},${height + 200}
-      Q${this.svgWidth / 2},${height + 400} 0,${height + 200}
-      Z
-    `;
   }
 
   ngAfterViewInit(): void {

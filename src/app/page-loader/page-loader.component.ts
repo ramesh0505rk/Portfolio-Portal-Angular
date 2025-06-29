@@ -12,8 +12,6 @@ export class PageLoaderComponent implements OnInit {
   @ViewChild('pageName') pageName!: HTMLElement;
   @Input() pageTitle: string = 'Loading...';
   @Input() contentClassName: string = '';
-  // @Input() svgHeight: number = 0;
-  // @Input() svgWidth: number = 0;
   @Input() x: number = 0;
   @Input() y: number = 0;
 

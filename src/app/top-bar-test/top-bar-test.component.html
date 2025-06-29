@@ -1,9 +1,13 @@
+<app-page-loader #introContainer *ngIf="showIntro" class="intro-container" [contentClassName]="'works'"
+    [pageTitle]="pageTitle" [x]="0" [y]="200"></app-page-loader>
+
 <div class="topbar-container d-flex align-items-center">
     <div class="logo-container">
         <a href="#" class="logo">Code by Ramz</a>
     </div>
     <div class="menu-container d-flex justify-content-center align-items-center">
-        <div class="menu-item-container" (click)="onMenuItemClick(item)" *ngFor="let item of textItems; trackBy: trackByIndex">
+        <div class="menu-item-container" (click)="onMenuItemClick(item)"
+            *ngFor="let item of textItems; trackBy: trackByIndex">
             <a #textElement class="text" [attr.data-text]="item.text">
                 {{ item.text }}
             </a>

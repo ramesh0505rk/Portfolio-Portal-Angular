@@ -21,7 +21,7 @@
 }
 
 .menu-item-container {
-    width: 120px; // set a width that fits your longest text nicely
+    width: 110px; // set a width that fits your longest text nicely
     text-align: center;
     // background-color: yellow;
 }
@@ -34,4 +34,10 @@
     height: 16px;
     overflow: hidden;
     cursor: pointer;
+}
+
+.intro-container {
+    position: fixed;
+    top: 0px;
+    z-index: 999;
 }

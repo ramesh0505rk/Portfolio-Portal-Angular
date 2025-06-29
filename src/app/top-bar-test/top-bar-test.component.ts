@@ -1,30 +1,31 @@
 import { CommonModule } from '@angular/common';
-import { AfterViewInit, Component, ElementRef, OnInit, QueryList, ViewChildren } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { Router } from '@angular/router';
 import gsap from 'gsap';
+import { PageLoaderComponent } from '../page-loader/page-loader.component';
 
-// declare const SplitText: any; // ← this tells TypeScript to ignore its type
 declare const ScrambleTextPlugin: any; // ← this tells TypeScript to ignore its type
-
-// gsap.registerPlugin(SplitText);
 gsap.registerPlugin(ScrambleTextPlugin);
-
-interface TextAnimation {
-  timeline: gsap.core.Timeline;
-  originalSplit: SplitText;
-  cloneSplit: SplitText;
-}
 
 
 @Component({
   selector: 'app-top-bar-test',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, PageLoaderComponent],
   templateUrl: './top-bar-test.component.html',
   styleUrl: './top-bar-test.component.scss'
 })
 export class TopBarTestComponent implements AfterViewInit, OnInit {
   @ViewChildren('textElement') textElements!: QueryList<ElementRef>
+
+  showIntro = true;
+  svgWidth = 0;
+  svgHeight = 0;
+  height = 0;
+  pageTitle: string = 'about';
+
+  timeline = gsap.timeline();
+
 
   textItems = [
     { text: 'works' },
@@ -35,15 +36,14 @@ export class TopBarTestComponent implements AfterViewInit, OnInit {
   constructor(private router: Router) { }
 
   ngOnInit(): void {
-
+    this.svgWidth = window.innerWidth;
+    this.height = window.innerHeight;
+    this.svgHeight = this.height + 400;
   }
 
   ngAfterViewInit(): void {
-
     this.textElements.forEach((elementRef) => {
       const el = elementRef.nativeElement as HTMLElement;
-
-
     })
 
     this.textElements.forEach((elementRef) => {
@@ -51,6 +51,10 @@ export class TopBarTestComponent implements AfterViewInit, OnInit {
       el.addEventListener('mouseenter', () => this.scramble(el));
     });
 
+    this.timeline.to('.intro-container', {
+      y: `${this.svgHeight}px`,   // starts below viewport
+      duration: 0,         // no animation yet, just sets position
+    });
   }
 
   scramble(el: HTMLElement): void {
@@ -72,7 +76,24 @@ export class TopBarTestComponent implements AfterViewInit, OnInit {
 
   onMenuItemClick(item: { text: string }): void {
     if (item.text === 'works') {
-      this.router.navigate(['/works']);
+      this.pageTitle = item.text;
+
+      this.timeline.to('.intro-container', {
+        duration: 0.8,
+        y: `-${100}px`,
+        ease: 'power3.inOut',
+        delay: 0.2,
+      })
+        .to('.intro-container', {
+          duration: 0.8,
+          y: `-${this.svgHeight}px`,
+          ease: 'power3.inOut',
+          delay: 0.2,
+          onComplete: () => {
+            this.showIntro = true;
+            this.router.navigate(['/works']);
+          }
+        });
     } else if (item.text === 'about') {
       this.router.navigate(['/about']);
     } else if (item.text === 'contact') {
