@@ -1,4 +1,4 @@
-<app-page-loader #introContainer *ngIf="showIntro" class="intro-container" [contentClassName]="'pageName'"
-    [pageTitle]="pageTitle" [x]="0" [y]="200"></app-page-loader>
+<app-page-loader #introContainer *ngIf="loaderService.showLoader$ | async" class="intro-container"
+    [contentClassName]="'pageName'" [pageTitle]="loaderService.pageTitle$ | async" [x]="0" [y]="200"></app-page-loader>
 
 <router-outlet />

@@ -2,11 +2,12 @@ import { CommonModule } from '@angular/common';
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import gsap from 'gsap';
 import { PageLoaderComponent } from '../page-loader/page-loader.component';
+import { TopBarTestComponent } from '../top-bar-test/top-bar-test.component';
 
 @Component({
   selector: 'app-works',
   standalone: true,
-  imports: [CommonModule, PageLoaderComponent],
+  imports: [CommonModule, TopBarTestComponent],
   templateUrl: './works.component.html',
   styleUrl: './works.component.scss'
 })

@@ -1,23 +1,26 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { PageLoaderComponent } from '../page-loader/page-loader.component';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PageLoaderService {
 
-  showLoader$ = new BehaviorSubject<boolean>(false);
-  pageTitle$ = new BehaviorSubject<string>('');
+  private showLoaderSubject = new BehaviorSubject<boolean>(false);
+  showLoader$ = this.showLoaderSubject.asObservable()
 
-  private loaderComponent!: PageLoaderComponent
+  private pageTitleSubject = new BehaviorSubject<string>('');
+  pageTitle$ = this.pageTitleSubject.asObservable()
+
+  triggerEntryAnimation$ = new BehaviorSubject<boolean>(false)
 
   startLoader(title: string) {
-    this.showLoader$.next(true);
-    this.pageTitle$.next(title);
+    this.showLoaderSubject.next(true);
+    this.pageTitleSubject.next(title);
   }
 
   stopLoader() {
-    this.showLoader$.next(false);
+    this.showLoaderSubject.next(false);
   }
+
 }

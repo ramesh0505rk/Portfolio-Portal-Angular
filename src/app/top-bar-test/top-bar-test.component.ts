@@ -68,26 +68,17 @@ export class TopBarTestComponent implements AfterViewInit, OnInit {
 
       this.loaderService.startLoader('works');
 
-      setTimeout(() => {
-        this.router.navigate(['/works']);
-      }, 836);
-
     } else if (item.text === 'about') {
 
       this.loaderService.startLoader('about');
 
-      setTimeout(() => {
-        this.router.navigate(['/about']);
-      }, 836);
-
     } else if (item.text === 'contact') {
 
       this.loaderService.startLoader('contact');
-
-      setTimeout(() => {
-        this.router.navigate(['/contact']);
-      }, 836); 
-
     }
+  }
+
+  onClickLogo() {
+    this.router.navigate(['/home'])
   }
 }

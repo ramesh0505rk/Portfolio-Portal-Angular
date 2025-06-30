@@ -10,7 +10,7 @@ import { PageLoaderComponent } from '../page-loader/page-loader.component';
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, TobBarComponent, TopBarTestComponent, PageLoaderComponent],
+  imports: [CommonModule, TopBarTestComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
@@ -23,10 +23,17 @@ export class HomeComponent implements AfterViewInit, OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    // ✅ Initialize dimensions early
     this.svgWidth = window.innerWidth;
     const height = window.innerHeight;
     this.svgHeight = height + 400;
+
+    this.svgPath = `
+      M0,200
+      Q${this.svgWidth / 2},0 ${this.svgWidth},200
+      L${this.svgWidth},${height + 200}
+      Q${this.svgWidth / 2},${height + 400} 0,${height + 200}
+      Z
+    `;
   }
 
   ngAfterViewInit(): void {
@@ -72,7 +79,7 @@ export class HomeComponent implements AfterViewInit, OnInit {
       .to(helloElement, { duration: 0.3, opacity: 0, delay: 0.6 });
 
 
-    timeline.to('.intro-container', {
+    timeline.to('.home-intro-container', {
       duration: 0.8,
       y: `-${this.svgHeight}px`,
       ease: 'power3.inOut',
