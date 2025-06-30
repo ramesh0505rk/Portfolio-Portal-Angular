@@ -15,8 +15,14 @@
     font-family: 'Guton', sans-serif;
 }
 
-.works {
+.pageName {
     font-size: 3rem;
     color: white;
     font-family: 'Guton', sans-serif;
+}
+
+.intro-container {
+    position: fixed;
+    top: 0px;
+    z-index: 999;
 }

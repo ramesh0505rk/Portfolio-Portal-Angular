@@ -3,6 +3,7 @@ import { AfterViewInit, Component, ElementRef, OnInit, QueryList, ViewChild, Vie
 import { Router } from '@angular/router';
 import gsap from 'gsap';
 import { PageLoaderComponent } from '../page-loader/page-loader.component';
+import { PageLoaderService } from '../Service/page-loader.service';
 
 declare const ScrambleTextPlugin: any; // ← this tells TypeScript to ignore its type
 gsap.registerPlugin(ScrambleTextPlugin);
@@ -18,10 +19,6 @@ gsap.registerPlugin(ScrambleTextPlugin);
 export class TopBarTestComponent implements AfterViewInit, OnInit {
   @ViewChildren('textElement') textElements!: QueryList<ElementRef>
 
-  showIntro = true;
-  svgWidth = 0;
-  svgHeight = 0;
-  height = 0;
   pageTitle: string = 'about';
 
   timeline = gsap.timeline();
@@ -33,12 +30,9 @@ export class TopBarTestComponent implements AfterViewInit, OnInit {
     { text: 'contact' }
   ];
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private loaderService: PageLoaderService) { }
 
   ngOnInit(): void {
-    this.svgWidth = window.innerWidth;
-    this.height = window.innerHeight;
-    this.svgHeight = this.height + 400;
   }
 
   ngAfterViewInit(): void {
@@ -49,11 +43,6 @@ export class TopBarTestComponent implements AfterViewInit, OnInit {
     this.textElements.forEach((elementRef) => {
       const el = elementRef.nativeElement as HTMLElement;
       el.addEventListener('mouseenter', () => this.scramble(el));
-    });
-
-    this.timeline.to('.intro-container', {
-      y: `${this.svgHeight}px`,   // starts below viewport
-      duration: 0,         // no animation yet, just sets position
     });
   }
 
@@ -76,28 +65,29 @@ export class TopBarTestComponent implements AfterViewInit, OnInit {
 
   onMenuItemClick(item: { text: string }): void {
     if (item.text === 'works') {
-      this.pageTitle = item.text;
 
-      this.timeline.to('.intro-container', {
-        duration: 0.8,
-        y: `-${100}px`,
-        ease: 'power3.inOut',
-        delay: 0.2,
-      })
-        .to('.intro-container', {
-          duration: 0.8,
-          y: `-${this.svgHeight}px`,
-          ease: 'power3.inOut',
-          delay: 0.2,
-          onComplete: () => {
-            this.showIntro = true;
-            this.router.navigate(['/works']);
-          }
-        });
+      this.loaderService.startLoader('works');
+
+      setTimeout(() => {
+        this.router.navigate(['/works']);
+      }, 836);
+
     } else if (item.text === 'about') {
-      this.router.navigate(['/about']);
+
+      this.loaderService.startLoader('about');
+
+      setTimeout(() => {
+        this.router.navigate(['/about']);
+      }, 836);
+
     } else if (item.text === 'contact') {
-      this.router.navigate(['/contact']);
+
+      this.loaderService.startLoader('contact');
+
+      setTimeout(() => {
+        this.router.navigate(['/contact']);
+      }, 836); 
+
     }
   }
 }

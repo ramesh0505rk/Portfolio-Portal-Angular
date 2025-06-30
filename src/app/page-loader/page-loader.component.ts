@@ -1,5 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { Component, input, Input, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, input, Input, OnInit, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
+import gsap from 'gsap';
+import { PageLoaderService } from '../Service/page-loader.service';
 
 @Component({
   selector: 'app-page-loader',
@@ -8,9 +11,10 @@ import { Component, input, Input, OnInit, ViewChild } from '@angular/core';
   templateUrl: './page-loader.component.html',
   styleUrl: './page-loader.component.scss'
 })
-export class PageLoaderComponent implements OnInit {
-  @ViewChild('pageName') pageName!: HTMLElement;
-  @Input() pageTitle: string = 'Loading...';
+export class PageLoaderComponent implements OnInit, AfterViewInit {
+  @ViewChild('introContainer') pageLoader!: PageLoaderComponent;
+
+  @Input() pageTitle: string = '';
   @Input() contentClassName: string = '';
   @Input() x: number = 0;
   @Input() y: number = 0;
@@ -18,6 +22,10 @@ export class PageLoaderComponent implements OnInit {
   svgHeight = 0
   svgWidth = 0
   svgPath: string = '';
+
+  timeline = gsap.timeline();
+
+  constructor(private router: Router, private loaderService: PageLoaderService) { }
 
   ngOnInit(): void {
     this.svgWidth = window.innerWidth;
@@ -32,4 +40,39 @@ export class PageLoaderComponent implements OnInit {
       Z
     `;
   }
+
+  ngAfterViewInit(): void {
+
+    this.timeline.to('.intro-container', {
+      y: `${this.svgHeight}px`,   // starts below viewport
+      duration: 0,         // no animation yet, just sets position
+    });
+  }
+
+  playEnterAnimation(onComplete: () => void) {
+    this.timeline.to('.intro-container', {
+      duration: 0.8,
+      y: `-${200}px`,
+      ease: 'power3.inOut',
+      delay: 0.2,
+      onComplete
+    })
+  }
+
+  playExitAnimation(onComplete: () => void): void {
+    this.timeline.to('.intro-container', {
+      duration: 0.8,
+      y: `-${200}px`,
+      ease: 'power3.inOut',
+      delay: 0.2,
+    })
+      .to('.intro-container', {
+        duration: 0.8,
+        y: `-${this.svgHeight}px`,
+        ease: 'power3.inOut',
+        delay: 0.2,
+        onComplete
+      });
+  }
+
 }

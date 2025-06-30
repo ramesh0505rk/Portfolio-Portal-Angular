@@ -6,8 +6,6 @@
 
 .menu-container {
     width: max-content;
-    // gap: 8px;
-    // background-color: red;
 }
 
 .logo-container {
@@ -21,9 +19,8 @@
 }
 
 .menu-item-container {
-    width: 110px; // set a width that fits your longest text nicely
+    width: 110px;
     text-align: center;
-    // background-color: yellow;
 }
 
 .text {
@@ -34,10 +31,4 @@
     height: 16px;
     overflow: hidden;
     cursor: pointer;
-}
-
-.intro-container {
-    position: fixed;
-    top: 0px;
-    z-index: 999;
 }
