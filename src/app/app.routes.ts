@@ -5,8 +5,8 @@ import { AboutComponent } from './about/about.component';
 import { ContactComponent } from './contact/contact.component';
 
 export const routes: Routes = [
-    { path: 'home', component: HomeComponent },
-    { path: '', redirectTo: '/home', pathMatch: 'full' },
+    { path: '', component: HomeComponent },
+    { path: 'home', redirectTo: '', pathMatch: 'full' },
     { path: 'works', component: WorksComponent },
     { path: 'about', component: AboutComponent },
     { path: 'contact', component: ContactComponent }

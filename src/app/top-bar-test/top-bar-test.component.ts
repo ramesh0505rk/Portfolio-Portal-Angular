@@ -79,6 +79,6 @@ export class TopBarTestComponent implements AfterViewInit, OnInit {
   }
 
   onClickLogo() {
-    this.router.navigate(['/home'])
+    this.router.navigate(['home'])
   }
 }

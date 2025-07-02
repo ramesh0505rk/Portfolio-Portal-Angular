@@ -1,4 +1,7 @@
+<app-top-bar-test class="top-bar"></app-top-bar-test>
 <app-page-loader #introContainer *ngIf="loaderService.showLoader$ | async" class="intro-container"
     [contentClassName]="'pageName'" [pageTitle]="loaderService.pageTitle$ | async" [x]="0" [y]="200"></app-page-loader>
 
-<router-outlet />
+<div class="main-content">
+    <router-outlet />
+</div>
