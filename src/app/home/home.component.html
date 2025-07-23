@@ -1,17 +1,24 @@
 <svg *ngIf="showIntro" class="home-intro-container" [attr.width]="svgWidth" [attr.height]="svgHeight"
     preserveAspectRatio="none">
 
-    <path [attr.d]="svgPath" fill="black" />
+    <path [attr.d]="svgPath" fill="#ffffff" />
 
     <foreignObject x="0" y="200" [attr.width]="svgWidth" [attr.height]="svgHeight - 400">
         <div class="text-holder" xmlns="http://www.w3.org/1999/xhtml">
-            <h1 #helloText class="hello-text">Hello</h1>
+            <h1 #helloText style="color: #000000;" class="hello-text">Hello</h1>
         </div>
     </foreignObject>
 </svg>
 
 <div class="main-content">
-    <p>this is home</p>
+    <div class="marquee-container">
+        <div class="marquee-track" #marqueeTrack>
+            <span class="marquee-text">Ramzy - </span>
+            <span class="marquee-text">Ramzy - </span>
+            <span class="marquee-text">Ramzy - </span>
+            <span class="marquee-text">Ramzy - </span>
+        </div>
+    </div>
 </div>
 
 <!-- <div class="parent">

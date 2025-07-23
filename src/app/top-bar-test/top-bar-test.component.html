@@ -2,8 +2,8 @@
     <div class="logo-container">
         <a (click)="onClickLogo()" class="logo">Code by Ramz</a>
     </div>
-    <div class="menu-container d-flex justify-content-center align-items-center">
-        <div class="menu-item-container" (click)="onMenuItemClick(item)"
+    <div class="menu-container d-flex">
+        <div class="menu-item-container d-flex justify-content-end" (click)="onMenuItemClick(item)"
             *ngFor="let item of textItems; trackBy: trackByIndex">
             <a #textElement class="text" [attr.data-text]="item.text">
                 {{ item.text }}

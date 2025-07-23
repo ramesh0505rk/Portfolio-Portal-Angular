@@ -6,7 +6,7 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class PageLoaderService {
 
-  private showLoaderSubject = new BehaviorSubject<boolean>(false);
+  public showLoaderSubject = new BehaviorSubject<boolean>(false);
   showLoader$ = this.showLoaderSubject.asObservable()
 
   private pageTitleSubject = new BehaviorSubject<string>('');

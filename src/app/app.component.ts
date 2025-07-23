@@ -1,5 +1,5 @@
 import { AfterViewChecked, Component, DoCheck, ViewChild } from '@angular/core';
-import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
+import { NavigationEnd, NavigationStart, Router, RouterOutlet } from '@angular/router';
 import { PageLoaderComponent } from './page-loader/page-loader.component';
 import { PageLoaderService } from './Service/page-loader.service';
 import { CommonModule } from '@angular/common';
@@ -17,13 +17,15 @@ export class AppComponent {
 
   title = 'ClientApp';
   constructor(public loaderService: PageLoaderService, private router: Router) {
-    this.router.events
-      .pipe(filter(e => e instanceof NavigationEnd))
-      .subscribe((event: any) => {
-        const url = event.urlAfterRedirects || event.url;
-        const page = url.split('/')[1] || 'home';
-
-          this.loaderService.startLoader(page);
-      })
+    // this.router.events
+    //   .pipe(filter(e => e instanceof NavigationStart))
+    //   .subscribe((event: any) => {
+    //     const url = event.urlAfterRedirects || event.url;
+    //     const page = url.split('/')[1] || 'home';
+    //     // if (!this.loaderService.showLoaderSubject.getValue()) {
+    //       console.log('current loader ', loaderService.showLoader$)
+    //       this.loaderService.startLoader(page);
+    //     // }
+    //   })
   }
 }

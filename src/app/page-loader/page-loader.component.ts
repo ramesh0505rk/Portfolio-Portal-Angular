@@ -1,8 +1,11 @@
 import { CommonModule } from '@angular/common';
-import { AfterViewInit, Component, input, Input, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, input, Input, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import gsap from 'gsap';
 import { PageLoaderService } from '../Service/page-loader.service';
+
+declare const ScrambleTextPlugin: any
+gsap.registerPlugin(ScrambleTextPlugin)
 
 @Component({
   selector: 'app-page-loader',
@@ -13,6 +16,8 @@ import { PageLoaderService } from '../Service/page-loader.service';
 })
 export class PageLoaderComponent implements OnInit, AfterViewInit {
   @ViewChild('introContainer') pageLoader!: PageLoaderComponent;
+  @ViewChild('textElement') textElement!: ElementRef
+  element!: HTMLElement
 
   @Input() pageTitle: string | null = '';
   @Input() contentClassName: string = '';
@@ -45,15 +50,20 @@ export class PageLoaderComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
+
+    this.element = this.textElement.nativeElement
+
     this.timeline.to('.intro-container', {
       y: `${this.svgHeight}px`,
       duration: 0,
       onComplete: () => {
         this.playEnterAnimation(() => {
-          this.playExitAnimation(() => {
-            this.loaderService.stopLoader()
+          this.playScrambleAnimation(() => {
+            this.playExitAnimation(() => {
+              this.loaderService.stopLoader()
+            })
+            this.router.navigate([`/${this.pageTitle}`])
           })
-          this.router.navigate([`/${this.pageTitle}`])
         })
       }
     });
@@ -67,6 +77,20 @@ export class PageLoaderComponent implements OnInit, AfterViewInit {
       delay: -0.2,
       onComplete
     })
+  }
+
+  playScrambleAnimation(onComplete: () => void) {
+    gsap.to(this.element, {
+      duration: 1,
+      scrambleText: {
+        text: this.element.innerHTML || '',
+        chars: 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_-+=<>?/|{}[]~',
+        revealDelay: 0.1,   // when to start revealing original text
+        speed: 0.3, // speed of the scrambling
+      },
+      ease: 'none',
+      onComplete
+    });
   }
 
   playExitAnimation(onComplete: () => void): void {

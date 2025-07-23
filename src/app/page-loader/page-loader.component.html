@@ -1,11 +1,10 @@
-<svg class="intro-container" [attr.width]="svgWidth" [attr.height]="svgHeight"
-    preserveAspectRatio="none">
+<svg class="intro-container" [attr.width]="svgWidth" [attr.height]="svgHeight" preserveAspectRatio="none">
 
-    <path [attr.d]="svgPath" fill="black" />
+    <path [attr.d]="svgPath" fill="#ffffff" />
 
     <foreignObject [attr.x]="x" [attr.y]="y" [attr.width]="svgWidth" [attr.height]="svgHeight - 400">
         <div class="text-holder" xmlns="http://www.w3.org/1999/xhtml">
-            <h1 class="{{ contentClassName }}">{{ pageTitle }}</h1>
+            <h1 style="color: #000000;" #textElement [attr.data-text]="pageTitle" class="{{ contentClassName }}">{{ pageTitle }}</h1>
         </div>
     </foreignObject>
 </svg>

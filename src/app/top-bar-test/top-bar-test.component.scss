@@ -2,7 +2,10 @@
     justify-content: space-between;
     font-family: 'Guton', sans-serif;
     padding: 20px 20px;
+    height: 60px;
     width: 100%;
+    background-color: #000000;
+    color: #ffffff;
 }
 
 .menu-container {
@@ -14,20 +17,21 @@
 
     .logo {
         text-decoration: none;
-        color: #000000;
         font-size: 1rem;
+        color: #ffffff;
         cursor: pointer;
     }
 }
 
 .menu-item-container {
-    width: 110px;
-    text-align: center;
+    width: 80px;
+    // background-color: yellow;
+    
 }
 
 .text {
     text-decoration: none;
-    color: #000000;
+    color: #ffffff;
     font-size: 1rem;
     line-height: 16px;
     height: 16px;
