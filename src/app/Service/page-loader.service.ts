@@ -15,6 +15,8 @@ export class PageLoaderService {
   triggerEntryAnimation$ = new BehaviorSubject<boolean>(false)
 
   startLoader(title: string) {
+    // Prevent double triggering if already loading
+    if (this.showLoaderSubject.getValue()) return;
     this.showLoaderSubject.next(true);
     this.pageTitleSubject.next(title);
   }
