@@ -23,6 +23,7 @@ export class PageLoaderService {
 
   stopLoader() {
     this.showLoaderSubject.next(false);
+    this.pageTitleSubject.next('');
   }
 
 }

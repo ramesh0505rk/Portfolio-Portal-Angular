@@ -17,15 +17,5 @@ export class AppComponent {
 
   title = 'ClientApp';
   constructor(public loaderService: PageLoaderService, private router: Router) {
-    // this.router.events
-    //   .pipe(filter(e => e instanceof NavigationStart))
-    //   .subscribe((event: any) => {
-    //     const url = event.urlAfterRedirects || event.url;
-    //     const page = url.split('/')[1] || 'home';
-    //     // if (!this.loaderService.showLoaderSubject.getValue()) {
-    //       console.log('current loader ', loaderService.showLoader$)
-    //       this.loaderService.startLoader(page);
-    //     // }
-    //   })
   }
 }

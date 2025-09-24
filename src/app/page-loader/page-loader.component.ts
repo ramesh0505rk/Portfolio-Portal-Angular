@@ -58,14 +58,14 @@ export class PageLoaderComponent implements OnInit, AfterViewInit {
       duration: 0,
       onComplete: () => {
         this.playEnterAnimation(() => {
-          this.playScrambleAnimation(() => {
+          // this.playScrambleAnimation(() => {
             // Navigate first, then play exit animation and stop loader
             this.router.navigate([`/${this.pageTitle}`]).then(() => {
               this.playExitAnimation(() => {
                 this.loaderService.stopLoader();
               });
             });
-          });
+          // });
         });
       }
     });
