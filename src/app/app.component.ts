@@ -17,5 +17,12 @@ export class AppComponent {
 
   title = 'ClientApp';
   constructor(public loaderService: PageLoaderService, private router: Router) {
+    // Always stop loader and reset transition flag on navigation end/error
+    // this.router.events.subscribe(event => {
+    //   if (event instanceof NavigationEnd) {
+    //     this.loaderService.stopLoader();
+    //     this.loaderService.setTransitionInProgress(false);
+    //   }
+    // });
   }
 }

@@ -52,20 +52,19 @@ export class PageLoaderComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
 
     this.element = this.textElement.nativeElement
-
+    this.loaderService.setTransitionInProgress(true);
     this.timeline.to('.intro-container', {
       y: `${this.svgHeight}px`,
       duration: 0,
       onComplete: () => {
         this.playEnterAnimation(() => {
-          // this.playScrambleAnimation(() => {
-            // Navigate first, then play exit animation and stop loader
-            this.router.navigate([`/${this.pageTitle}`]).then(() => {
+          this.router.navigate([`/${this.pageTitle}`])
+            .finally(() => {
               this.playExitAnimation(() => {
                 this.loaderService.stopLoader();
+                this.loaderService.setTransitionInProgress(false);
               });
             });
-          // });
         });
       }
     });
