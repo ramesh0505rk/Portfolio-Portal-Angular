@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { AfterViewInit, Component, ElementRef, input, Input, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild, NgZone } from '@angular/core';
 import { Router } from '@angular/router';
 import gsap from 'gsap';
 import { PageLoaderService } from '../Service/page-loader.service';
@@ -30,9 +30,11 @@ export class PageLoaderComponent implements OnInit, AfterViewInit {
 
   timeline = gsap.timeline();
 
-  constructor(private router: Router, private loaderService: PageLoaderService) {
-
-  }
+  constructor(
+    private router: Router,
+    private loaderService: PageLoaderService,
+    private ngZone: NgZone
+  ) {}
 
   ngOnInit(): void {
     console.log('Entered', this.pageTitle)
@@ -50,21 +52,26 @@ export class PageLoaderComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-
-    this.element = this.textElement.nativeElement
-    this.loaderService.setTransitionInProgress(true);
+    this.element = this.textElement.nativeElement;
+    this.ngZone.run(() => {
+      this.loaderService.setTransitionInProgress(true);
+    });
     this.timeline.to('.intro-container', {
       y: `${this.svgHeight}px`,
       duration: 0,
       onComplete: () => {
         this.playEnterAnimation(() => {
-          this.router.navigate([`/${this.pageTitle}`])
-            .finally(() => {
-              this.playExitAnimation(() => {
-                this.loaderService.stopLoader();
-                this.loaderService.setTransitionInProgress(false);
+          this.ngZone.run(() => {
+            this.router.navigate([`/${this.pageTitle}`])
+              .finally(() => {
+                this.playExitAnimation(() => {
+                  this.ngZone.run(() => {
+                    this.loaderService.stopLoader();
+                    this.loaderService.setTransitionInProgress(false);
+                  });
+                });
               });
-            });
+          });
         });
       }
     });
