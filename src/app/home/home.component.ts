@@ -97,37 +97,5 @@ export class HomeComponent implements AfterViewInit, OnInit {
         this.showIntro = false;
       }
     });
-    // gsap.registerPlugin(ScrollTrigger);
-
-    // this.ngZone.runOutsideAngular(() => {
-
-    //   gsap.timeline({
-    //     scrollTrigger: {
-    //       trigger: '.animated-element',
-    //       start: 'start center',
-    //       end: 'bottom center',
-    //       scrub: 1,
-    //       pin: true,
-    //       markers: true,
-    //       // toggleActions: 'play reverse play reverse',
-    //     },
-    //   }).to('.animated-element', {
-    //     x: 750,
-    //     rotation: 360,
-    //     scale: 2.5,
-    //   });
-
-    //   const lenis = new Lenis();
-    //   lenis.on('scroll', (e: any) => {
-    //     console.log('Lenis Scroll:', e);
-    //   });
-
-    //   const raf = (time: number) => {
-    //     lenis.raf(time);
-    //     requestAnimationFrame(raf);
-    //   };
-
-    //   requestAnimationFrame(raf);
-    // });
   }
 }

@@ -5,15 +5,6 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root'
 })
 export class PageLoaderService {
-  private transitionInProgress = false;
-
-  isTransitionInProgress() {
-    return this.transitionInProgress;
-  }
-  setTransitionInProgress(val: boolean) {
-    this.transitionInProgress = val;
-  }
-
   public showLoaderSubject = new BehaviorSubject<boolean>(false);
   showLoader$ = this.showLoaderSubject.asObservable()
 

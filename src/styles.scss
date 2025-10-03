@@ -13,3 +13,32 @@
     font-style: normal;
     font-display: swap;
 }
+
+/* Hide scrollbar by default */
+body {
+    overflow-y: auto !important;
+    scrollbar-width: none !important;
+    /* Firefox */
+}
+
+body::-webkit-scrollbar {
+    display: none !important;
+    /* Chrome, Safari, Edge */
+}
+
+/* Show scrollbar when user scrolls */
+body.show-scrollbar {
+    scrollbar-width: thin !important;
+    /* Firefox */
+}
+
+body.show-scrollbar::-webkit-scrollbar {
+    display: block;
+    /* Chrome, Safari, Edge */
+    width: 8px;
+}
+
+body.show-scrollbar::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.4);
+    border-radius: 4px;
+}

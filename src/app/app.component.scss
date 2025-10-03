@@ -1,28 +1,12 @@
 .content {
     overflow: hidden;
-    margin-top: 60px;
-    height: calc(100vh - 60px); /* Adjust for the height of the top bar */
      background-color: yellow;
 }
 
 .top-bar{
-    position: fixed;
+    position: relative;
     top: 0;
     left: 0;
     width: 100%;
     z-index: 998;
 }
-
-// .footer{
-//     font-family: 'Guton', sans-serif;
-//     position: fixed;
-//     bottom: 0;
-//     left: 0;
-//     height: 60px;
-//     padding: 20px 20px;
-//     width: 100%;
-//     z-index: 998;
-//     background: #000000;
-//     color: #ffffff;
-//     text-align: center;
-// }

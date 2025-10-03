@@ -53,9 +53,6 @@ export class PageLoaderComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     this.element = this.textElement.nativeElement;
-    this.ngZone.run(() => {
-      this.loaderService.setTransitionInProgress(true);
-    });
     this.timeline.to('.intro-container', {
       y: `${this.svgHeight}px`,
       duration: 0,
@@ -67,7 +64,6 @@ export class PageLoaderComponent implements OnInit, AfterViewInit {
                 this.playExitAnimation(() => {
                   this.ngZone.run(() => {
                     this.loaderService.stopLoader();
-                    this.loaderService.setTransitionInProgress(false);
                   });
                 });
               });

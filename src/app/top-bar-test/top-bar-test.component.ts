@@ -64,8 +64,8 @@ export class TopBarTestComponent implements AfterViewInit, OnInit {
   }
 
   onMenuItemClick(item: { text: string }): void {
-    // Prevent starting loader if already loading or transition in progress
-    if (this.loaderService.showLoaderSubject.getValue() || this.loaderService.isTransitionInProgress()) return;
+    // Prevent starting loader if already loading
+    if (this.loaderService.showLoaderSubject.getValue()) return;
     if (item.text === 'works') {
       this.loaderService.startLoader('works');
     } else if (item.text === 'about') {
