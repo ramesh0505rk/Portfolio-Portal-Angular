@@ -2,9 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&display=swap');
 
 /* You can add global styles to this file, and also import other style files */
-// body {
-// margin: 0;
-// }
+
 
 @font-face {
     font-family: 'Guton';
@@ -14,31 +12,25 @@
     font-display: swap;
 }
 
-/* Hide scrollbar by default */
-body {
-    overflow-y: auto !important;
-    scrollbar-width: none !important;
-    /* Firefox */
+html {
+    background-color: #000000;
+}
+
+html.remove-scrollbar {
+    scrollbar-width: none;
 }
 
 body::-webkit-scrollbar {
-    display: none !important;
-    /* Chrome, Safari, Edge */
+    width: .6rem;
 }
 
-/* Show scrollbar when user scrolls */
-body.show-scrollbar {
-    scrollbar-width: thin !important;
-    /* Firefox */
+body::-webkit-scrollbar-track {
+    background: transparent;
+    margin-block: .5rem;
+    border-radius: 100vw;
 }
 
-body.show-scrollbar::-webkit-scrollbar {
-    display: block;
-    /* Chrome, Safari, Edge */
-    width: 8px;
-}
-
-body.show-scrollbar::-webkit-scrollbar-thumb {
-    background: rgba(0, 0, 0, 0.4);
-    border-radius: 4px;
+body::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+    border-radius: 100vw;
 }

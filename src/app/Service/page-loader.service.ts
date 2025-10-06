@@ -18,11 +18,13 @@ export class PageLoaderService {
     if (this.showLoaderSubject.getValue()) return;
     this.showLoaderSubject.next(true);
     this.pageTitleSubject.next(title);
+    document.documentElement.classList.add('remove-scrollbar');
   }
 
   stopLoader() {
     this.showLoaderSubject.next(false);
     this.pageTitleSubject.next('');
+    document.documentElement.classList.remove('remove-scrollbar');
   }
 
 }
