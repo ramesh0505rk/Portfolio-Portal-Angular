@@ -15,7 +15,7 @@ gsap.registerPlugin(ScrambleTextPlugin)
   styleUrl: './page-loader.component.scss'
 })
 export class PageLoaderComponent implements OnInit, AfterViewInit {
-  @ViewChild('introContainer') pageLoader!: PageLoaderComponent;
+  // @ViewChild('introContainer') pageLoader!: PageLoaderComponent;
   @ViewChild('textElement') textElement!: ElementRef
   element!: HTMLElement
 
