@@ -56,7 +56,7 @@ export class AppComponent implements OnInit, AfterViewInit {
     if (this.floatingMenuOpen) {
       this.floatingMenuService.enableFloatingMenu();
       this.timeline
-        .to('.menu-container', {
+        .to('.floating-menu-container', {
           x: `${this.svgWidth / 1.6}px`,
           duration: 0.9,
           ease: 'power3.inOut'
@@ -71,7 +71,7 @@ export class AppComponent implements OnInit, AfterViewInit {
       this.floatingMenuService.disableFloatingMenu();
 
       this.timeline
-        .to('.menu-container', {
+        .to('.floating-menu-container', {
           x: `${this.svgWidth}px`,
           duration: 0.9,
           ease: 'power3.inOut'
