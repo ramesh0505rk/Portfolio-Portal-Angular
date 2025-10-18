@@ -49,39 +49,38 @@ export class AppComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
+
   }
 
   toggleMenu() {
     this.floatingMenuOpen = !this.floatingMenuOpen;
-    if (this.floatingMenuOpen) {
-      this.floatingMenuService.enableFloatingMenu();
-      this.timeline
-        .to('.floating-menu-container', {
-          x: `${this.svgWidth / 1.6}px`,
-          duration: 0.9,
-          ease: 'power3.inOut'
-        })
-        .to('#menu-path', {
-          attr: { d: this.svgPathEnd },
-          duration: 0.3,
-          delay: 0.3,
-          ease: 'power3.inOut'
-        }, "<"); // Runs at same time as previous
-    } else {
-      this.floatingMenuService.disableFloatingMenu();
 
-      this.timeline
-        .to('.floating-menu-container', {
-          x: `${this.svgWidth}px`,
-          duration: 0.9,
-          ease: 'power3.inOut'
-        })
-        .to('#menu-path', {
-          attr: { d: this.svgPath },
-          duration: 0.3,
-          delay: 0.3,
-          ease: 'power3.inOut'
-        }, "<"); // Runs at same time as previous
-    }
+    const targetX = this.floatingMenuOpen ? `${this.svgWidth / 1.6}px` : `${this.svgWidth}px`;
+    const targetPath = this.floatingMenuOpen ? this.svgPathEnd : this.svgPath;
+
+    // enable/disable your service right away
+    if (this.floatingMenuOpen) this.floatingMenuService.enableFloatingMenu();
+    else this.floatingMenuService.disableFloatingMenu();
+
+    // stop any running tweens on these targets so new tweens start immediately
+    gsap.killTweensOf('.floating-menu-container');
+    gsap.killTweensOf('#menu-path');
+
+    // animate container — overwrite ensures it replaces any in-flight tweens
+    gsap.to('.floating-menu-container', {
+      x: targetX,
+      duration: 0.9,
+      ease: 'power3.inOut',
+      overwrite: true
+    });
+
+    // animate SVG path; delay kept to match original, but will not queue behind previous tweens
+    gsap.to('#menu-path', {
+      attr: { d: targetPath },
+      duration: 0.3,
+      delay: 0.3,
+      ease: 'power3.inOut',
+      overwrite: true
+    });
   }
 }
