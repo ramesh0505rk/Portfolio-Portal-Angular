@@ -39,4 +39,30 @@
 </button>
 <svg class="floating-menu-container" [attr.width]="svgWidth" [attr.height]="svgHeight" preserveAspectRatio="none">
     <path id="menu-path" fill="#ffffff" [attr.d]="svgPath" />
+    <foreignObject [attr.x]="0" [attr.y]="0" [attr.width]="menuContentWidth" [attr.height]="svgHeight">
+        <div class="menu-content">
+            <div class="menu-content-child">
+                <div class="nav-header-tab">
+                    navigation
+                    <hr />
+                </div>
+                <div class="menus-tab">
+                    <a class="menu0">home</a>
+                    <a class="menu1">works</a>
+                    <a class="menu2">about</a>
+                    <a class="menu3">contact</a>
+                </div>
+
+                <div class="socials-tab">
+                    socials
+                    <hr />
+                    <div class="socials-icons">
+                        <a href="https://www.linkedin.com/" target="_blank">LinkedIn</a>
+                        <a href="https://www.instagram.com/ram_ez_rk" target="_blank">Instagram</a>
+                        <a href="https://www.twitter.com/" target="_blank">Twitter</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </foreignObject>
 </svg>

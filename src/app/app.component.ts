@@ -20,6 +20,9 @@ export class AppComponent implements OnInit, AfterViewInit {
   svgPath: string = '';
   svgPathEnd: string = '';
 
+  menuContentWidth: number = 0
+  menuContentHeight: number = 100
+
   floatingMenuOpen: boolean = false;
 
   timeline = gsap.timeline();
@@ -29,6 +32,8 @@ export class AppComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     this.svgWidth = window.innerWidth;
     this.svgHeight = window.innerHeight;
+
+    this.menuContentWidth = (this.svgWidth - this.svgWidth / 1.6);
 
     this.svgPath = `
       M50,0
@@ -82,5 +87,23 @@ export class AppComponent implements OnInit, AfterViewInit {
       ease: 'power3.inOut',
       overwrite: true
     });
-  }
+
+    // animate menu items with a stagger so they appear together but offset in time.
+    // kill any item tweens first so rapid clicks react immediately.
+    gsap.killTweensOf('.menus-tab a');
+    gsap.to('.menus-tab a', {
+      x: this.floatingMenuOpen ? 0 : 50,        // open => to 0, close => back to 300px
+      duration: 0.5,
+      // when opening keep a slight delay to match path/container animation;
+      // when closing start sooner so reversal feels responsive
+      delay: this.floatingMenuOpen ? 0.3 : 0.2,
+      ease: 'power3.inOut',
+      stagger: {
+      each: 0.01,
+      from: this.floatingMenuOpen ? 'start' : 'end' // opening: left-to-right; closing: right-to-left
+    },
+      overwrite: true
+    });
+
+}
 }

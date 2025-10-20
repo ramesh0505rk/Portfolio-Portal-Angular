@@ -12,6 +12,7 @@
     font-display: swap;
 }
 
+
 html {
     background-color: #000000;
     overflow-x: hidden;
@@ -34,4 +35,8 @@ body::-webkit-scrollbar-track {
 body::-webkit-scrollbar-thumb {
     background: linear-gradient(180deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
     border-radius: 100vw;
+}
+
+body{
+    font-family: 'Guton', sans-serif !important;
 }
