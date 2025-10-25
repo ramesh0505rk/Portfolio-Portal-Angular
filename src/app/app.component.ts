@@ -1,5 +1,5 @@
-import { AfterViewChecked, AfterViewInit, Component, DoCheck, Host, HostListener, OnInit, ViewChild } from '@angular/core';
-import { NavigationEnd, NavigationStart, Router, RouterOutlet } from '@angular/router';
+import { AfterViewInit, Component, DoCheck, Host, HostListener, OnInit, ViewChild } from '@angular/core';
+import { Router, RouterOutlet } from '@angular/router';
 import { PageLoaderComponent } from './page-loader/page-loader.component';
 import { PageLoaderService } from './Service/page-loader.service';
 import { CommonModule } from '@angular/common';
@@ -27,7 +27,7 @@ export class AppComponent implements OnInit, AfterViewInit {
 
   timeline = gsap.timeline();
 
-  constructor(public loaderService: PageLoaderService, public floatingMenuService: FloatingMenuService) { }
+  constructor(public loaderService: PageLoaderService, public floatingMenuService: FloatingMenuService, private router: Router) { }
 
   ngOnInit(): void {
     this.svgWidth = window.innerWidth;
@@ -90,8 +90,8 @@ export class AppComponent implements OnInit, AfterViewInit {
 
     // animate menu items with a stagger so they appear together but offset in time.
     // kill any item tweens first so rapid clicks react immediately.
-    gsap.killTweensOf('.menus-tab a');
-    gsap.to('.menus-tab a', {
+    gsap.killTweensOf('.menus-tab div');
+    gsap.to('.menus-tab div', {
       x: this.floatingMenuOpen ? 0 : 50,        // open => to 0, close => back to 300px
       duration: 0.5,
       // when opening keep a slight delay to match path/container animation;
@@ -99,11 +99,34 @@ export class AppComponent implements OnInit, AfterViewInit {
       delay: this.floatingMenuOpen ? 0.3 : 0.2,
       ease: 'power3.inOut',
       stagger: {
-      each: 0.01,
-      from: this.floatingMenuOpen ? 'start' : 'end' // opening: left-to-right; closing: right-to-left
-    },
+        each: 0.01,
+        from: this.floatingMenuOpen ? 'start' : 'end' // opening: left-to-right; closing: right-to-left
+      },
       overwrite: true
     });
+  }
 
-}
+  onMenuItemClick(text: string): void {
+    this.toggleMenu();
+    // Prevent starting loader if already loading
+    if (this.loaderService.showLoaderSubject.getValue()) return;
+    if (text === 'works') {
+      setTimeout(() => {
+        this.loaderService.startLoader('works');
+      }, 300);
+    } else if (text === 'about') {
+      setTimeout(() => {
+        this.loaderService.startLoader('about');
+      }, 300);
+    } else if (text === 'contact') {
+      setTimeout(() => {
+        this.loaderService.startLoader('contact');
+      }, 300);
+    }
+  }
+
+  onClickLogo() {
+    this.toggleMenu();
+    this.router.navigate(['home'])
+  }
 }

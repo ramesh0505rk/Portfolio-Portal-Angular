@@ -4,7 +4,7 @@
     </div>
     <div class="menu-container d-flex">
         <div class="menu-item-container d-flex justify-content-end" (click)="onMenuItemClick(item)"
-            *ngFor="let item of textItems; trackBy: trackByIndex">
+            *ngFor="let item of textItems">
             <span #textElement class="text" [attr.data-text]="item.text">
                 {{ item.text }}
             </span>

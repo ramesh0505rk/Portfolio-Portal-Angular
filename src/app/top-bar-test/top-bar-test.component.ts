@@ -59,9 +59,9 @@ export class TopBarTestComponent implements AfterViewInit, OnInit {
     });
   }
 
-  trackByIndex(index: number): number {
-    return index;
-  }
+  // trackByIndex(index: number): number {
+  //   return index;
+  // }
 
   onMenuItemClick(item: { text: string }): void {
     // Prevent starting loader if already loading

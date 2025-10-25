@@ -1,6 +1,22 @@
-.content {
-    // min-height: calc(100vh - 60px);
-    background-color: yellow;
+.overlay{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    z-index: 997;
+    animation: fadeIn 0.3s 0.3s forwards;
+}
+
+@keyframes fadeIn {
+    from{
+        opacity: 0;
+    }
+    to{
+        opacity: 1;
+    }
 }
 
 .top-bar {
@@ -8,14 +24,14 @@
     top: 0;
     left: 0;
     width: 100%;
-    z-index: 998;
+    z-index: 996;
 }
 
 .floating-menu-container {
     position: fixed;
     top: 0;
     transform: translateX(100%);
-    z-index: 999;
+    z-index: 998;
 }
 
 button {
@@ -24,14 +40,14 @@ button {
 }
 
 .floating-menu {
+    position: fixed;
     background-color: #455CE9;
     width: 80px;
     top: 30px;
     right: 30px;
     border-radius: 50px;
     border: none;
-    position: fixed;
-    z-index: 1000;
+    z-index: 999;
     cursor: pointer;
 }
 
@@ -69,15 +85,11 @@ button {
     height: 100%;
     background: transparent;
     justify-items: center;
-
-
 }
 
 .menu-content-child {
     height: 100%;
     width: 70%;
-    // background-color: rebeccapurple;
-
     display: flex;
     flex-direction: column;
     align-items: start;
@@ -85,12 +97,12 @@ button {
     gap: 30px;
 }
 
-.nav-header-tab{
+.nav-header-tab {
     width: 100%;
     color: gray;
 }
 
-.menus-tab{
+.menus-tab {
     width: 100%;
 
     display: flex;
@@ -99,9 +111,13 @@ button {
     justify-content: center;
     gap: 30px;
 
+    div {
+        transform: translateX(50px);
+        padding: 0px;
+    }
+
     a {
         font-size: 5rem;
-        transform: translateX(50px);
         cursor: pointer;
         text-decoration: none;
         color: #000000;
@@ -109,22 +125,51 @@ button {
     }
 }
 
-.socials-tab{
+.socials-tab {
     width: 100%;
     color: gray;
 
-    .socials-icons{
+    .socials-icons {
         display: flex;
         flex-direction: row;
         align-items: center;
         justify-content: start;
         gap: 20px;
 
-        a{
+        a {
             font-weight: 600;
             text-decoration: none;
             cursor: pointer;
             color: #455CE9;
         }
     }
+}
+
+.hash-container {
+    width: 60px;
+    align-content: end;
+}
+
+.menus {
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    gap: 5px;
+}
+
+.menu0 .hash,
+.menu1 .hash,
+.menu2 .hash,
+.menu3 .hash {
+    transition: 0.7s ease-in-out;
+    stroke-dasharray: 60 31 60 103 60 43 60 600;
+    stroke-dashoffset: 430;
+}
+
+.menu0:hover .hash,
+.menu1:hover .hash,
+.menu2:hover .hash,
+.menu3:hover .hash {
+    stroke-dasharray: 60 31 60 103 60 43 60 600;
+    stroke-dashoffset: 0;
 }
