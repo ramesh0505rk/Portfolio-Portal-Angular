@@ -57,7 +57,7 @@ button {
 }
 
 .floating-menu .hamburger {
-    transition: translate 0.7s, rotate 0.7s;
+    transition: translate 0.7s ease-in-out, rotate 0.7s ease-in-out;
 }
 
 .floating-menu[aria-expanded='true'] .hamburger {
@@ -66,7 +66,7 @@ button {
 }
 
 .floating-menu .line {
-    transition: 0.7s;
+    transition: 0.7s ease-in-out;
     stroke-dasharray: 60 31 60 300;
 }
 
