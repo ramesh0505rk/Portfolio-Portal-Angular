@@ -6,6 +6,8 @@ import { CommonModule } from '@angular/common';
 import { TopBarTestComponent } from './top-bar-test/top-bar-test.component';
 import gsap from 'gsap';
 import { FloatingMenuService } from './Service/floating-menu.service';
+import { ScrollBarService } from './Service/scroll-bar.service';
+import { distinctUntilChanged } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -24,12 +26,29 @@ export class AppComponent implements OnInit, AfterViewInit {
   menuContentHeight: number = 100
 
   floatingMenuOpen: boolean = false;
+  showFloatingMenu: boolean = false;
+  floatingMenuAnimationClass: string = '';
 
   timeline = gsap.timeline();
 
-  constructor(public loaderService: PageLoaderService, public floatingMenuService: FloatingMenuService, private router: Router) { }
+  private hideTimeout: any = null;
+
+  constructor(public loaderService: PageLoaderService, public floatingMenuService: FloatingMenuService, private router: Router, private scrollBarService: ScrollBarService) { }
 
   ngOnInit(): void {
+    this.calculateSvgPaths();
+
+    this.scrollBarService.scrollLimitReachedForFloatingMenu$.pipe(distinctUntilChanged()).subscribe(reached => {
+      reached ? this.showMenu() : this.hideMenu();
+    })
+  }
+
+  @HostListener('window:resize', [])
+  onWindowResize() {
+    this.calculateSvgPaths();
+  }
+
+  calculateSvgPaths() {
     this.svgWidth = window.innerWidth;
     this.svgHeight = window.innerHeight;
 
@@ -50,11 +69,38 @@ export class AppComponent implements OnInit, AfterViewInit {
       L${this.svgWidth},0
       Z
     `;
+  }
 
+  showMenu() {
+    if (this.hideTimeout) {
+      clearTimeout(this.hideTimeout);
+      this.hideTimeout = null;
+    }
+
+    this.showFloatingMenu = true;
+    this.floatingMenuAnimationClass = 'menu-enter'
+  }
+
+  hideMenu() {
+    if (this.hideTimeout) {
+      clearTimeout(this.hideTimeout);
+      this.hideTimeout = null;
+    }
+
+    this.floatingMenuAnimationClass = 'menu-leave'
+
+    this.hideTimeout = setTimeout(() => {
+      this.showFloatingMenu = false;
+      this.floatingMenuAnimationClass = '';
+    }, 500);
   }
 
   ngAfterViewInit(): void {
+  }
 
+  @HostListener('window:scroll', [])
+  onWindowScroll() {
+    this.scrollBarService.setScrollLimitReachedForFloatingMenu(window.scrollY)
   }
 
   toggleMenu() {

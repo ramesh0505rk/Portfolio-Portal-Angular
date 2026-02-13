@@ -7,7 +7,8 @@
     <div class="main-content">
         <router-outlet />
     </div>
-    <button class="floating-menu" (click)="toggleMenu()" [attr.aria-expanded]="floatingMenuOpen">
+    <button class="floating-menu" *ngIf="showFloatingMenu" [ngClass]="floatingMenuAnimationClass" (click)="toggleMenu()"
+        [attr.aria-expanded]="floatingMenuOpen">
         <svg class="hamburger" viewBox="-10 -10 120 120">
             <path class="line" stroke="white" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"
                 fill="none" d="m20 40 h60 a1 1 0 0 1 0 20 h-60 a1 1 0 0 1 0 -40 h30 v70" />
