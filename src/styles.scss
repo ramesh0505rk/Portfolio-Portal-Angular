@@ -19,22 +19,23 @@ html {
 }
 
 html.remove-scrollbar {
-    scrollbar-width: none;
+    // scrollbar-width: none;
 }
 
 body::-webkit-scrollbar {
-    width: .6rem;
+    // width: .6rem;
+    width: 0; /* Hides the scrollbar - no width */
 }
 
 body::-webkit-scrollbar-track {
-    background: transparent;
-    margin-block: .5rem;
-    border-radius: 100vw;
+    // background: transparent;
+    // margin-block: .5rem;
+    // border-radius: 100vw;
 }
 
 body::-webkit-scrollbar-thumb {
-    background: linear-gradient(180deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
-    border-radius: 100vw;
+    // background: linear-gradient(180deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+    // border-radius: 100vw;
 }
 
 body{

@@ -15,7 +15,6 @@ import { PageLoaderComponent } from '../page-loader/page-loader.component';
   styleUrl: './home.component.scss'
 })
 export class HomeComponent implements AfterViewInit, OnInit {
-  @ViewChild('marqueeTrack', { static: true }) marqueeTrack!: ElementRef;
   showIntro = true;
   svgPath: string = '';
   svgWidth = 0;
@@ -44,15 +43,6 @@ export class HomeComponent implements AfterViewInit, OnInit {
     const greetings = [
       'Hello', 'नमस्ते', 'Hola', 'Bonjour', 'こんにちは', 'Ciao', '안녕하세요', 'مرحبا', 'Привет', 'Olá', 'नमस्कार', 'Здраво', 'வணக்கம்'
     ];
-
-    const track = this.marqueeTrack.nativeElement;
-
-    gsap.to(track, {
-      xPercent: -25, // scroll halfway (because we have 2 copies)
-      duration: 3,
-      repeat: -1,
-      ease: 'linear'
-    });
 
     const timeline = gsap.timeline()
 
